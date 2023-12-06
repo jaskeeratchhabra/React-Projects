@@ -1,12 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useEffect, useState} from 'react'
+import { ThemeProvider} from './context/theme'
+import ThemeBtn from './components/ThemeBtn';
+import Card from './components/Card';
 
-function App() {
+function App() 
+{
+  const [ThemeMode,setThemeMode]=useState("light");
+  const darkTheme=()=>{
+      setThemeMode("light");
+  }
+  const lightTheme=()=>{
+       setThemeMode("dark");
+  }
+  useEffect(()=>{
+        document.querySelector('html').classList.remove("light","dark")
+        document.querySelector('html').classList.add(ThemeMode);
+  },[ThemeMode])
   return (
-    <div>
-      <h1 className="bg-green-100 p-4 m-4 px-3 text-blue-500 text-center">hello</h1>
-    </div>
-  );
-}
+  <ThemeProvider value={{ThemeMode,darkTheme,lightTheme}}>
+    <div className="flex flex-wrap min-h-screen items-center">
+          <div className="w-full">
+             <div className="w-full max-w-sm mx-auto flex justify-end mb-4">
+                  
+               <ThemeBtn/>
+              </div>
+ 
+              <div className="w-full max-w-sm mx-auto">
+                <Card/>
+              </div>
+           </div>
+     </div>
+  </ThemeProvider>
+  )
+  }
+     
+   
 
-export default App;
+export default App
