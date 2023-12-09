@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react';
-import { TodoProvider,TodoContext } from './context';
+import { TodoProvider } from './context';
 import TodoForm from './components/TodoForm';
 import TodoItem from './components/TodoItem';
 
@@ -7,7 +7,7 @@ function App(){
   const [todos,setTodos]=useState([])
   const addTodo=(todo)=>{
      setTodos((prev)=>
-        [{id:Date.now,...todo},...prev])
+        [{id:Date.now(),...todo},...prev])
   }
   const updateTodo=(id,todo)=>{
         setTodos((prev)=>
